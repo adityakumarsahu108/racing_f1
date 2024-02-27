@@ -1,38 +1,155 @@
-.App {
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px; /* Increased base font size */
+}
+
+h1, h2 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Forms */
+form {
+  max-width: 500px; /* Adjust width as needed */
+  /* Removed margin: 20px auto; */
+  padding: 25px;
+  background-color: rgba(245, 245, 245, 0.9); /* Lightened background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease-in-out;
+  color: #333;
+  /* Increased font weight for headings */
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 20px;
+  display: flex; /* Use flexbox for layout */
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: column; /* Stack elements vertically */
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  
+}
+
+form:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+/* Tables */
+table {
+  /* Removed width: 100%; */
+  margin: 0 auto; /* Center the table */
+  background-color: #fff; /* White background */
+  border-collapse: collapse;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Adjusted shadow and opacity */
+  border-radius: 5px; /* Increased border radius */
+  overflow: hidden; /* Add overflow to hide box-shadow on scroll */
+  /* Fixed width for all tables */
+  width: 700px; /* Adjust this value to your desired fixed width */
+}
+
+table th, table td {
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+/* Container for forms and tables */
+/* Container for forms and tables */
+.form-container {
+  display: flex; /* Use flexbox for two-column layout */
+  flex-wrap: wrap; /* Allow elements to wrap onto multiple lines */
+}
+
+.form-container .box {
+  /* Apply styling to both forms and tables */
+  flex: 0 0 50%; /* Set width to 50% of available space */
+  margin: 10px 10px 10px 0; /* Adjust margins for spacing */
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added subtle box shadow */
+}
+
+form input,
+form select,
+form textarea {
+  margin-bottom: 15px;
+}
+thead {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Buttons */
+.mama {
+  padding: 10px 20px; /* Increased horizontal padding */
+  margin-right: 20px; /* Add spacing between buttons */
+  background-color: #4CAF50;
   color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block; /* Ensures buttons display side-by-side */
 }
 
-.App-link {
-  color: #61dafb;
+.mama:hover {
+  background-color: #45a049;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* Container */
+.container {
+  margin-top: 20px;
+}
+
+/* Box */
+.box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added subtle box shadow */
+}
+
+.box h3 {
+  margin-bottom: 20px;
+}
+
+.box table {
+  margin-top: 20px;
+}
+
+/* Individual table styles (optional) */
+#driverDetailsTable {
+  background-color: #E1F5FE;
+}
+
+#teamsTable {
+  background-color: #FFECB3;
+}
+
+#raceDetailsTable {
+  background-color: #B3E0A4;
+}
+
+#driverChampionshipsTable {
+  background-color: #F8BBD0;
+}
+
+#resultsTable {
+  background-color: #C5CAE9;
+}
+@media (max-width: 768px) {
+  .form-container {
+    flex-direction: column;
   }
 }
