@@ -4,7 +4,7 @@ const cors = require('cors'); // Import the c
 const app = express();
 const port = 4000;
 const bodyparser = require('body-parser');
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyparser.json());
 app.use(cors()); // Enable CORS for all routes
