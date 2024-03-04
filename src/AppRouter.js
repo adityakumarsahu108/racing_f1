@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import TableSlider from './TableSlider';
+
+
 
 
 
@@ -107,8 +110,8 @@ function AppRouter() {
   // Function to update Team Details
   const updateTeamDetails = async (t_id) => {
     const formData = {
-      name: prompt('Enter new team name:'),
-      country: prompt('Enter new team country:'),
+      t_name: prompt('Enter new Team name:'),
+      d_d1: prompt('Enter new driver id:'),
     };
 
     try {
@@ -173,8 +176,9 @@ function AppRouter() {
   // Function to update Race Details Data
   const updateRaceDetailsData = async (race_id) => {
     const formData = {
-      location: prompt('Enter new race location:'),
-      date: prompt('Enter new race date:'),
+      track_length: prompt('Enter new tracklength'),
+      t_safety_car: prompt('Enter new safetycar:'),
+      weather: prompt('Enter new weather:'),
     };
 
     try {
@@ -239,7 +243,9 @@ function AppRouter() {
   // Function to update Driver Championship Data
   const updateDriverChampionship = async (dc_id) => {
     const formData = {
-      points: prompt('Enter new points:'),
+      d_id: prompt('Enter new driver id'),
+      driver_race_wins: prompt('Enter new race wins:'),
+      driver_total_points: prompt('Enter new total points:'),
     };
 
     try {
@@ -304,8 +310,8 @@ function AppRouter() {
   // Function to update Race Results Data
   const updateRaceResults = async (res_id) => {
     const formData = {
-      position: prompt('Enter new position:'),
-      points: prompt('Enter new points:'),
+      d_id: prompt('Enter new driver id'),
+      driver_as_per_position: prompt('Enter new position:'),
     };
 
     try {
@@ -350,11 +356,11 @@ function AppRouter() {
   };
 
   return (
-    <div>
+    <div className='bg'>
       <h1>RACE MANAGEMENT SYSTEM</h1>
 
       {/* Form for Driver Data */}
-      <form
+      <form className='form-container'
         onSubmit={(e) => {
           e.preventDefault();
           const formData = {
@@ -378,7 +384,7 @@ function AppRouter() {
 
 
       {/* Form for Teams Data */}
-      <form
+      <form className='form-container'
         onSubmit={(e) => {
           e.preventDefault();
           const formData = {
@@ -402,15 +408,15 @@ function AppRouter() {
 
 
       {/* Form for Race Details Data */}
-      <form
+      <form className='form-container'
         onSubmit={(e) => {
           e.preventDefault();
           const formData = {
             race_id: e.target.race_id.value,
-            track_length:e.target.track_length.value,
-            t_safety_car:e.target.t_safety_car.value,
+            track_length: e.target.track_length.value,
+            t_safety_car: e.target.t_safety_car.value,
             weather: e.target.weather.value,
-            
+
           };
           submitRaceDetailsData(formData);
         }}
@@ -430,7 +436,7 @@ function AppRouter() {
 
 
       {/* Form for Driver Championship Data */}
-      <form
+      <form className='form-container'
         onSubmit={(e) => {
           e.preventDefault();
           const formData = {
@@ -456,14 +462,14 @@ function AppRouter() {
 
 
       {/* Form for Race Results Data */}
-      <form
+      <form className='form-container'
         onSubmit={(e) => {
           e.preventDefault();
           const formData = {
             res_id: e.target.res_id.value,
             d_id: e.target.d_id.value,
             driver_as_per_position: e.target.driver_as_per_position.value,
-            
+
           };
           submitRaceResults(formData);
         }}
@@ -471,149 +477,173 @@ function AppRouter() {
         <h2>Race Results Data</h2>
         <label htmlFor="res_id">Result ID:</label>
         <input type="number" id="res_id" name="res_id" required />
-        <label htmlFor="d_id">Race ID:</label>
+        <label htmlFor="d_id">Driver ID:</label>
         <input type="number" id="d_id" name="d_id" required />
-        <label htmlFor="driver_as_per_position">Driver ID:</label>
+        <label htmlFor="driver_as_per_position">Position:</label>
         <input type="number" id="driver_as_per_position" name="driver_as_per_position" required />
-        
+
         <button className='mama' type="submit">Submit Race Results Data</button>
       </form>
 
-        
+
       {/* Display Driver Details */}
-      <h2> Driver Data</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {driverDetails.map((row) => (
-            <tr key={row.id}>
-              <td>{row.id}</td>
-              <td>{row.name}</td>
-              <td>{row.d_age}</td>
-              <td>
-                <button className='mama' onClick={() => updateDriverDetails(row.id)}>Update</button>
-                <button className='mama' onClick={() => deleteDriverDetails(row.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Display Teams Data */}
-      <h2> Teams Data</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Team ID</th>
-            <th>Team Name</th>
-            <th>Driver ID</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {teams.map((row) => (
-            <tr key={row.t_id}>
-              <td>{row.t_id}</td>
-              <td>{row.t_name}</td>
-              <td>{row.d_d1}</td>
-              <td>
-                <button className='mama' onClick={() => updateTeamDetails(row.t_id)}>Update</button>
-                <button className='mama' onClick={() => deleteTeamDetails(row.t_id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Display Race Details Data */}
-      <h2> Race Details Data</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Race ID</th>
-            <th>Track Length</th>
-            <th>Total Safety Car</th>
-            <th>Weather</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {raceDetails.map((row) => (
-            <tr key={row.race_id}>
-              <td>{row.race_id}</td>
-              <td>{row.track_length}</td>
-              <td>{row.t_safety_car}</td>
-              <td>{row.weather}</td>
-              <td>
-                <button className='mama' onClick={() => updateRaceDetailsData(row.race_id)}>Update</button>
-                <button className='mama' onClick={() => deleteRaceDetailsData(row.race_id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Display Driver Championship Data */}
-      <h2> Driver Championship Data</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>ChampionID</th>
-            <th>ID</th>
-            <th>RaceWins</th>
-            <th>Totalpoints</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {driverChampionship.map((row) => (
-            <tr key={row.dc_id}>
-              <td>{row.dc_id}</td>
-              <td>{row.d_id}</td>
-              <td>{row.driver_race_wins}</td>
-              <td>{row.driver_total_points}</td>
-              <td>
-                <button className='mama' onClick={() => updateDriverChampionship(row.dc_id)}>Update</button>
-                <button className='mama' onClick={() => deleteDriverChampionship(row.dc_id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
 
 
-      {/* Display Race Results Data */}
-      <h2>Race Results Data</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>RES id</th>
-            <th>driverID</th>
-            <th>Positions</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {raceResults.map((row) => (
-            <tr key={row.res_id}>
-              <td>{row.res_id}</td>
-              <td>{row.d_id}</td>
-              <td>{row.driver_as_per_position}</td>
-              <td>
-                <button className='mama' onClick={() => updateRaceResults(row.res_id)}>Update</button>
-                <button className='mama' onClick={() => deleteRaceResults(row.res_id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <TableSlider>
+
+
+
+
+        <div className='table-container'>
+          <h2 className='table-h2'> Driver Data</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {driverDetails.map((row) => (
+                <tr key={row.id}>
+                  <td>{row.id}</td>
+                  <td>{row.name}</td>
+                  <td>{row.d_age}</td>
+                  <td>
+                    <button className='mama' onClick={() => updateDriverDetails(row.id)}>Update</button>
+                    <button className='mama' onClick={() => deleteDriverDetails(row.id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+
+        {/* Display Teams Data */}
+        <div className='table-container'>
+          <h2 className='table-h2'> Teams Data</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Team ID</th>
+                <th>Team Name</th>
+                <th>Driver ID</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teams.map((row) => (
+                <tr key={row.t_id}>
+                  <td>{row.t_id}</td>
+                  <td>{row.t_name}</td>
+                  <td>{row.d_d1}</td>
+                  <td>
+                    <button className='mama' onClick={() => updateTeamDetails(row.t_id)}>Update</button>
+                    <button className='mama' onClick={() => deleteTeamDetails(row.t_id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Display Race Details Data */}
+        <div className='table-container'>
+          <h2 className='table-h2'> Race Details Data</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Race ID</th>
+                <th>Track Length</th>
+                <th>Total Safety Car</th>
+                <th>Weather</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {raceDetails.map((row) => (
+                <tr key={row.race_id}>
+                  <td>{row.race_id}</td>
+                  <td>{row.track_length}</td>
+                  <td>{row.t_safety_car}</td>
+                  <td>{row.weather}</td>
+                  <td>
+                    <button className='mama' onClick={() => updateRaceDetailsData(row.race_id)}>Update</button>
+                    <button className='mama' onClick={() => deleteRaceDetailsData(row.race_id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Display Driver Championship Data */}
+        <div className='table-container'>
+          <h2 className='table-h2'> Driver Championship Data</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ChampionID</th>
+                <th>ID</th>
+                <th>RaceWins</th>
+                <th>Totalpoints</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {driverChampionship.map((row) => (
+                <tr key={row.dc_id}>
+                  <td>{row.dc_id}</td>
+                  <td>{row.d_id}</td>
+                  <td>{row.driver_race_wins}</td>
+                  <td>{row.driver_total_points}</td>
+                  <td>
+                    <button className='mama' onClick={() => updateDriverChampionship(row.dc_id)}>Update</button>
+                    <button className='mama' onClick={() => deleteDriverChampionship(row.dc_id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+
+        {/* Display Race Results Data */}
+        <div className='table-container'>
+          <h2 className='table-h2'>Race Results Data</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>RES id</th>
+                <th>driverID</th>
+                <th>Positions</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {raceResults.map((row) => (
+                <tr key={row.res_id}>
+                  <td>{row.res_id}</td>
+                  <td>{row.d_id}</td>
+                  <td>{row.driver_as_per_position}</td>
+                  <td>
+                    <button className='mama' onClick={() => updateRaceResults(row.res_id)}>Update</button>
+                    <button className='mama' onClick={() => deleteRaceResults(row.res_id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+        </div>
+
+      </TableSlider>
+
+
     </div>
   );
 }
